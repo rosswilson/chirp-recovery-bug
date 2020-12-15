@@ -23,4 +23,11 @@ defmodule ChirpWeb.ModalComponent do
   def handle_event("close", _, socket) do
     {:noreply, push_patch(socket, to: socket.assigns.return_to)}
   end
+
+  @impl true
+  def handle_event(event, _, socket) do
+    IO.puts("ModalComponent handle_event: #{event}, assigns: #{inspect(socket.assigns)}")
+
+    {:noreply, socket}
+  end
 end

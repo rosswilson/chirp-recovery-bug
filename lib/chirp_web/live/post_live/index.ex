@@ -6,11 +6,15 @@ defmodule ChirpWeb.PostLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    IO.puts("PostLive.Index mount assigns: #{inspect(socket.assigns)}")
+
     {:ok, assign(socket, :posts, list_posts())}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
+    IO.puts("PostLive.Index handle_params assigns: #{inspect(socket.assigns)}")
+
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 

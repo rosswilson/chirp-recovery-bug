@@ -15,6 +15,12 @@ defmodule ChirpWeb.PostLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"post" => post_params}, socket) do
+    IO.puts(
+      "FormComponent handle_event: validate, params: #{inspect(post_params)}, assigns: #{
+        inspect(socket.assigns)
+      }"
+    )
+
     changeset =
       socket.assigns.post
       |> Timeline.change_post(post_params)
@@ -24,7 +30,23 @@ defmodule ChirpWeb.PostLive.FormComponent do
   end
 
   def handle_event("save", %{"post" => post_params}, socket) do
+    IO.puts(
+      "FormComponent handle_event: save, params: #{inspect(post_params)}, assigns: #{
+        inspect(socket.assigns)
+      }"
+    )
+
     save_post(socket, socket.assigns.action, post_params)
+  end
+
+  def handle_event(event, params, socket) do
+    IO.puts(
+      "FormComponent handle_event: #{event}, params: #{inspect(params)}, assigns: #{
+        inspect(socket.assigns)
+      }"
+    )
+
+    {:noreply, socket}
   end
 
   defp save_post(socket, :edit, post_params) do
